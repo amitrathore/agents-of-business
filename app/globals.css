@@ -62,7 +62,7 @@ img { display: block; width: 100%; }
 .hero h1 { font-size: clamp(66px, 9.2vw, 154px); letter-spacing: -.085em; line-height: .76; margin: 0 0 42px; text-transform: uppercase; }
 .hero h1 em { color: var(--blue); font-family: Georgia, serif; font-size: .72em; font-weight: 400; text-transform: lowercase; }
 .hero-copy > p { font-size: clamp(17px, 1.5vw, 22px); font-weight: 600; line-height: 1.5; margin: 0 0 34px; max-width: 660px; }
-.button { align-items: center; border: 2px solid var(--ink); display: inline-flex; font-size: 13px; font-weight: 900; gap: 32px; justify-content: space-between; letter-spacing: .05em; padding: 16px 20px; text-decoration: none; text-transform: uppercase; transition: transform .2s, box-shadow .2s; }
+.button { align-items: center; border: 2px solid var(--ink); cursor: pointer; display: inline-flex; font-family: inherit; font-size: 13px; font-weight: 900; gap: 32px; justify-content: space-between; letter-spacing: .05em; padding: 16px 20px; text-decoration: none; text-transform: uppercase; transition: transform .2s, box-shadow .2s; }
 .button:hover { box-shadow: 7px 7px 0 var(--ink); transform: translate(-3px, -3px); }
 .button-primary { background: var(--coral); }
 .hero-art { align-self: center; min-height: 620px; position: relative; z-index: 2; }
@@ -125,6 +125,40 @@ img { display: block; width: 100%; }
 .button-light:hover { box-shadow: 7px 7px 0 var(--acid); }
 .socials { align-items: end; border-top: 1px solid rgba(244,240,230,.25); display: flex; gap: 28px; grid-column: 1 / -1; margin-top: 100px; padding-top: 24px; position: relative; z-index: 2; }
 .socials span, .socials a { font-size: 11px; font-weight: 900; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.social-form-trigger { background: none; border: 0; color: inherit; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 900; letter-spacing: .08em; padding: 0; text-transform: uppercase; }
+.social-form-trigger span { margin-left: 4px; }
+
+.lead-form-modal {
+  background: var(--ink);
+  height: 100dvh;
+  inset: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  position: fixed;
+  width: 100vw;
+  z-index: 1000;
+}
+.lead-form-frame { border: 0; display: block; height: 100%; width: 100%; }
+.lead-form-close {
+  align-items: center;
+  background: var(--acid);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 4px 4px 0 var(--coral);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  font: 700 28px/1 Arial, sans-serif;
+  height: 46px;
+  justify-content: center;
+  padding: 0 0 3px;
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  top: max(14px, env(safe-area-inset-top));
+  width: 46px;
+  z-index: 1001;
+}
+.lead-form-close:focus-visible, .social-form-trigger:focus-visible { outline: 3px solid var(--aqua); outline-offset: 4px; }
 footer { align-items: center; background: var(--acid); display: flex; justify-content: space-between; padding: 28px clamp(20px, 6vw, 98px); }
 footer p, footer > a:last-child { font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .footer-brand img { height: 36px; width: 36px; }

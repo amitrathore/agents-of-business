@@ -1,3 +1,5 @@
+import LeadFormTrigger from "./LeadForm";
+
 const sections = [
   {
     eyebrow: "The New Internet Economy",
@@ -139,10 +141,10 @@ export default function Home() {
           <p className="eyebrow">Start the Engines</p>
           <h2>Leapfrog<br /><span>Everyone</span></h2>
           <p>AI and FinTech are changing how business operates, and it is happening at the speed of the Internet, faster and faster every year. Engage with Agents of Business and deploy an army of strategic professionals to help drive your market expansion. Reach out below, and an Agent of Business will connect with you:</p>
-          <a className="button button-light" href="mailto:user@domain.ext">Email <Arrow /></a>
+          <LeadFormTrigger />
         </div>
         <div className="socials" aria-label="Social platforms">
-          <span>X</span><span>Instagram</span><span>TikTok</span><span>Facebook</span><a href="mailto:user@domain.ext">Email</a>
+          <span>X</span><span>Instagram</span><span>TikTok</span><span>Facebook</span><LeadFormTrigger className="social-form-trigger" label="Contact" />
         </div>
       </section>
 

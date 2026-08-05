@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const output = new URL("../out/index.html", import.meta.url);
+const leadFormSource = new URL("../app/LeadForm.tsx", import.meta.url);
 
 test("exports the complete Agents of Business landing page", async () => {
   const html = await readFile(output, "utf8");
@@ -14,6 +15,19 @@ test("exports the complete Agents of Business landing page", async () => {
   assert.match(html, /Corporate Ventures/);
   assert.match(html, /Leapfrog/);
   assert.doesNotMatch(html, /agents-of-business\.carrd\.co|fonts\.googleapis\.com|Made with Carrd/);
+});
+
+test("opens the Tally lead form inside a full-viewport on-site dialog", async () => {
+  const [html, source] = await Promise.all([
+    readFile(output, "utf8"),
+    readFile(leadFormSource, "utf8"),
+  ]);
+
+  assert.doesNotMatch(html, /mailto:user@domain\.ext/);
+  assert.match(html, /Start the conversation/);
+  assert.match(source, /tally\.so\/embed\/9qYOkG/);
+  assert.match(source, /aria-modal="true"/);
+  assert.match(source, /document\.body\.style\.overflow = "hidden"/);
 });
 
 test("keeps all original image assets local", async () => {
