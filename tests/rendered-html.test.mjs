@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const output = new URL("../out/index.html", import.meta.url);
@@ -35,8 +35,18 @@ test("opens the Tally lead form inside a full-viewport on-site dialog", async ()
 });
 
 test("keeps all original image assets local", async () => {
-  const html = await readFile(output, "utf8");
   for (const image of ["image01", "image02", "image03", "image04", "image05", "image06", "image07", "card"]) {
-    assert.match(html, new RegExp(`/images/${image}\\.jpg`));
+    await access(new URL(`../public/images/${image}.jpg`, import.meta.url));
   }
+});
+
+test("exports compelling social sharing metadata", async () => {
+  const html = await readFile(output, "utf8");
+
+  assert.match(html, /Agents of Business — Human \+ AI Growth/);
+  assert.match(html, /unlock nonlinear growth across sales, partnerships, M&amp;A, and innovation/);
+  assert.match(html, /og-agents-of-business\.png/);
+  assert.match(html, /summary_large_image/);
+  assert.match(html, /1200/);
+  assert.match(html, /630/);
 });
