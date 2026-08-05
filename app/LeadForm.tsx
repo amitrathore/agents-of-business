@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const EMBED_URL =
-  "https://tally.so/embed/9qYOkG?alignLeft=1&hideTitle=1&transparentBackground=1&source=website&campaign=main-site";
+  "https://tally.so/embed/9qYOkG?hideTitle=1&source=website&campaign=main-site";
 
 type LeadFormTriggerProps = {
   className?: string;
@@ -67,6 +67,7 @@ export default function LeadFormTrigger({
             <span aria-hidden="true">×</span>
           </button>
           <iframe
+            allow="clipboard-write"
             className="lead-form-frame"
             src={EMBED_URL}
             title="Start the Engines — Agents of Business"

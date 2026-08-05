@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,6 +21,13 @@ export const metadata: Metadata = {
     images: ["/images/card.jpg"],
   },
   icons: { icon: "/images/image03.jpg", shortcut: "/images/image03.jpg" },
+};
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  themeColor: "#101827",
+  viewportFit: "cover",
+  width: "device-width",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

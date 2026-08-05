@@ -4,6 +4,7 @@ import test from "node:test";
 
 const output = new URL("../out/index.html", import.meta.url);
 const leadFormSource = new URL("../app/LeadForm.tsx", import.meta.url);
+const globalStyles = new URL("../app/globals.css", import.meta.url);
 
 test("exports the complete Agents of Business landing page", async () => {
   const html = await readFile(output, "utf8");
@@ -18,16 +19,19 @@ test("exports the complete Agents of Business landing page", async () => {
 });
 
 test("opens the Tally lead form inside a full-viewport on-site dialog", async () => {
-  const [html, source] = await Promise.all([
+  const [html, source, styles] = await Promise.all([
     readFile(output, "utf8"),
     readFile(leadFormSource, "utf8"),
+    readFile(globalStyles, "utf8"),
   ]);
 
   assert.doesNotMatch(html, /mailto:user@domain\.ext/);
   assert.match(html, /Start the conversation/);
   assert.match(source, /tally\.so\/embed\/9qYOkG/);
+  assert.doesNotMatch(source, /transparentBackground|alignLeft/);
   assert.match(source, /aria-modal="true"/);
   assert.match(source, /document\.body\.style\.overflow = "hidden"/);
+  assert.match(styles, /height: 100vh;[\s\S]{0,60}height: 100svh;[\s\S]{0,60}height: 100dvh;/);
 });
 
 test("keeps all original image assets local", async () => {
